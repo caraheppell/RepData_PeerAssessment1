@@ -110,11 +110,14 @@ activity_no_NAs <- subset(activity_no_NAs, select = -c(day))
 2. Make a panel plot containing a time series plot of the 5-minute interval 
 (x-axis) and the average number of steps taken, averaged across all weekday days 
 or weekend days (y-axis).
-```{r}
+```{r fig.height=10}
 weekday_activity <- activity_no_NAs[activity_no_NAs$dayType == "weekday",]
 weekend_activity <- activity_no_NAs[activity_no_NAs$dayType == "weekend",]
 activity_pattern_weekday <- aggregate(steps ~ interval, weekday_activity, mean)
 activity_pattern_weekend <- aggregate(steps ~ interval, weekend_activity, mean)
-plot(activity_pattern_weekday, type = "l", col = "lightpink", main = "Weekdays")
-plot(activity_pattern_weekend, type = "l", col = "plum1", main = "Weekends")
+layout(matrix(c(2,1)))
+plot(activity_pattern_weekday, type = "l", col = "lightpink", main = "Weekday", 
+     cex.main = 0.8, cex.lab =0.6, cex.axis = 0.6)
+plot(activity_pattern_weekend, type = "l", col = "plum1", main = "Weekend", 
+     cex.main = 0.8, cex.lab =0.6, cex.axis = 0.6)
 ```
